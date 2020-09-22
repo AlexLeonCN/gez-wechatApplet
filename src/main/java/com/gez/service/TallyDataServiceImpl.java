@@ -16,5 +16,9 @@ public class TallyDataServiceImpl implements TallyDataService {
 		List<Map<String, Object>> dataList = tallyDataMapper.getDefTallyData(openId);
 		return dataList;
 	}
+	@Override
+	public void insertTallyData(Map<String, Object> map) {
+		tallyDataMapper.insertDefTallyData(map);
+	}
 
 }
