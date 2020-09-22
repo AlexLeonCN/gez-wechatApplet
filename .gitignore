@@ -1,0 +1,51 @@
+# Complied class file
+*.class
+
+# XSL transformation
+*.out.xml
+
+# Log FIle
+*.log
+*.out
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+
+# virtual machine crash logs
+hs_err_pid*
+
+# Eclilpse Project Files
+*/.classpath
+.classpath
+*/.project
+.project
+*/.settings/
+.settings/
+*/.apt_generated/
+.apt_generated/
+*/.factorypath
+.factorypath
+
+# IDEA files
+*/.idea/
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# maven files
+/target/*
+/target/
+*/target/*
+
+# bin files
+/bin/*
+/bin/
+*/bin/*
+
+# MAC system files
+*/.DS_store
+.DS_store
