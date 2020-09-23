@@ -1,13 +1,16 @@
 package com.gez.mapper;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.UpdateProvider;
+
 import com.gez.provider.TallyDataProvider;
 
 @Mapper
@@ -33,6 +36,9 @@ public interface TallyDataMapper {
 	void insertDefTallyData(Map<String, Object> map);
 	//这里mysql获取时间的方法是 now(), 还有CURDATE()仅获取日期
 	
-	@SelectProvider(type = TallyDataProvider.class, method = "updateDefTallyData")
+	@UpdateProvider(type = TallyDataProvider.class, method = "updateDefTallyData")
 	void updateDefTallyData(Map<String, Object> map);
+	
+	@Delete("DELETE FROM GEZ_DEF_TALLY WHERE TALLY_ID = #{tallyId} and OPEN_ID = #{openId} ")
+	void deleteDefTallyData(Map<String, Object> map);
 }

@@ -7,5 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 public interface TallyDataService {
 	List<Map<String, Object>> getDefTallyData(@Param("openId")String opedId);
-	void insertTallyData(Map<String, Object> map);
+	void insertDefTallyData(Map<String, Object> map);
+	void updateDefTallyData(Map<String, Object> map);
+	void deleteDefTallyData(Map<String, Object> map);
 }

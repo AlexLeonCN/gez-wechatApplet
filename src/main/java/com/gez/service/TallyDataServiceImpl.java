@@ -17,8 +17,16 @@ public class TallyDataServiceImpl implements TallyDataService {
 		return dataList;
 	}
 	@Override
-	public void insertTallyData(Map<String, Object> map) {
+	public void insertDefTallyData(Map<String, Object> map) {
 		tallyDataMapper.insertDefTallyData(map);
+	}
+	@Override
+	public void updateDefTallyData(Map<String, Object> map) {
+		tallyDataMapper.updateDefTallyData(map);
+	}
+	@Override
+	public void deleteDefTallyData(Map<String, Object> map) {
+		tallyDataMapper.deleteDefTallyData(map);
 	}
 
 }
