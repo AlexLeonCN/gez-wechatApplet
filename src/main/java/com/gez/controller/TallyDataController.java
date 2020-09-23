@@ -32,7 +32,7 @@ public class TallyDataController {
 			resultMap.put("msg", "用户标识openId不能为空");
 			return resultMap;
 		}
-		List<Map<String, Object>> dataList = new ArrayList();
+		List<Map<String, Object>> dataList = new ArrayList<>();
 		dataList = tallyDataService.getDefTallyData(openId);
 		if (!Utils.isNullOrEmpty(dataList)) {
 			resultMap.put("data", dataList);
@@ -82,6 +82,7 @@ public class TallyDataController {
 		return resultMap;
 	}
 	
+	//删除默认记账本中的记录
 	@DeleteMapping("/defTallyData")
 	Map<String, Object> deleteDefTallyData(@RequestBody Map<String, Object> map){
 		Map<String, Object> resultMap = new HashMap();
