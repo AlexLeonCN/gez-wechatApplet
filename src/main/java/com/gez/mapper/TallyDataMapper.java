@@ -19,12 +19,15 @@ public interface TallyDataMapper {
 			@Result(column = "TALLY_ID",property = "tallyId"),
 			@Result(column = "OPEN_ID",property = "openId"),
 			@Result(column = "SORT_ID",property = "sortId"),
+			@Result(column = "SORT_NAME",property = "sortName"),
 			@Result(column = "CREATE",property = "createTime"),
 			@Result(column = "AMT",property = "amt"),
 			@Result(column = "DESCRIBE",property = "describe"),
-			@Result(column = "TRANS_DATE",property = "transDate")
+			@Result(column = "TRANS_DATE",property = "transDate"),
+			@Result(column = "TRANS_TYPE",property = "transType")
 	})
-	@Select("select `TALLY_ID`,`OPEN_ID`,`SORT_ID`,`AMT`,`DESCRIBE`,date_format(`TRANS_DATE`,'%Y-%m-%d') as `TRANS_DATE`,date_format(`CREATE`,'%Y-%m-%d %H:%i:%s') AS `CREATE` from gez_def_tally where OPEN_ID = #{openId} order by `TRANS_DATE`,`CREATE` ")
+	@Select("select t.`TALLY_ID`,t.`OPEN_ID`,t.`SORT_ID`,s.`SORT_NAME`,t.`AMT`,t.`TRANS_TYPE`,t.`DESCRIBE`,date_format(t.`TRANS_DATE`,'%Y-%m-%d') as `TRANS_DATE`,date_format(t.`CREATE`,'%Y-%m-%d %H:%i:%s') AS `CREATE` "
+			+ "from gez_def_tally t LEFT JOIN gez_sort s on t.`SORT_ID` = s.`SORT_ID` where t.`OPEN_ID` = #{openId} order by t.`TRANS_DATE`,t.`CREATE` ")
 	List<Map<String, Object>> getDefTallyData(@Param("openId")String openId);
 	//这个是Oracle的写法 :  select `TALLY_ID`,`OPEN_ID`,`SORT_ID`,`AMT`,`DESCRIBE`,to_char(`TRANS_DATE`,'yyyy-MM-dd') as `TRANS_DATE`, to_char(`CREATE`,'yyyy-MM-dd HH:mm:ss') AS `CREATE` from gez_def_tally where OPEN_ID = #{openId} order by `TRANS_DATE`,`CREATE`
 	//mysql中的date_format函数是将数据库中的timestamp转成字符串输出, 而str_to_date是将字符串转成日期入库
