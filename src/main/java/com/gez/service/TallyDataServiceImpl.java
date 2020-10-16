@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gez.mapper.TallyDataMapper;
+/**
+ * 用于账单的增删改查操作
+ */
 @Service
 public class TallyDataServiceImpl implements TallyDataService {
 	@Autowired

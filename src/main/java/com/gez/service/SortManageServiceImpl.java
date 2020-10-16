@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gez.mapper.SortManageMapper;
-
+/**
+ * 用于账单的类别的增删改查操作
+ */
 @Service
 public class SortManageServiceImpl implements SortManageService {
 	@Autowired
