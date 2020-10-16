@@ -1,17 +1,17 @@
 package com.gez.controller;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.gez.service.SortManageService;
 import com.gez.utils.Utils;
+/**
+ * 此类用于账单的类别的增删改查操作
+ */
 @RestController
 public class SortManageController {
 	@Autowired
