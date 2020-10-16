@@ -9,13 +9,32 @@
 	</parent>
 	<artifactId>gez-weChatApplet</artifactId>
 	<packaging>jar</packaging>
+	
 	<dependencies>
 		<dependency>
 			<groupId>com.gez</groupId>
 			<artifactId>gez-common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<!--eureka -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+		<!--boot junit test -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 	</dependencies>
+	
 	<build>
 		<plugins>
 			<!--引入maven插件 一般当项目打包部署时需要使用插件 ,跳过测试类打包 -->
