@@ -9,7 +9,7 @@
 	</parent>
 	<artifactId>gez-weChatApplet</artifactId>
 	<packaging>jar</packaging>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>com.gez</groupId>
@@ -21,6 +21,13 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
+		
+		<!-- config client -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-config-client</artifactId>
+		</dependency>
+		
 		<!--boot junit test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -34,7 +41,7 @@
 			</exclusions>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<plugins>
 			<!--引入maven插件 一般当项目打包部署时需要使用插件 ,跳过测试类打包 -->

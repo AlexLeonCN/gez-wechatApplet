@@ -15,6 +15,12 @@ spring:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp  application:    name: gez-wechatApplet #eureka注册实例显示这个名称
+  cloud:
+    config:
+      name: gez-wechatApplet  #文件前缀名称
+      profile: test #服务环境名称 test本地, sit一测, uat二测, pro生产 例如 {name}-{profile} = gez-wechatApplet-test.yml
+      uri: http://127.0.0.1:8769
+    
 mybatis-plus:
   type-aliases-package: com.jt.pojo
   mapper-locations: classpath:/mybatis/mappers/*.xml
