@@ -3,17 +3,30 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.stereotype.Service;
+
+import com.gez.utils.Base64Util;
+import com.gez.utils.FileUtil;
+import com.gez.utils.HttpUtil;
+import com.google.gson.Gson;
+@Service
 public class BaiduAipServiceImp implements BaiduAipService {
 	// 官网获取的 API Key 更新为你注册的
-	String clientId;
+	@Value("${baiduOcrApiKey}")
+	String apiKey;
 	// 官网获取的 Secret Key 更新为你注册的
-	String clientSecret;
+	@Value("${baiduOcrSecretKey}")
+	String secretKey;
+	
 	//获取百度AccessToken
 	@Override
-	public String getAccessToken() {
+	public String getAccessToken() throws Exception{
 		/**
 		 * 获取API访问token
 		 * 该token有一定的有效期，需要自行管理，当失效时需重新获取.
@@ -28,10 +41,9 @@ public class BaiduAipServiceImp implements BaiduAipService {
 				// 1. grant_type为固定参数
 				+ "grant_type=client_credentials"
 				// 2. 官网获取的 API Key
-				+ "&client_id=" + clientId
+				+ "&client_id=" + apiKey
 				// 3. 官网获取的 Secret Key
-				+ "&client_secret=" + clientSecret;
-		try {
+				+ "&client_secret=" + secretKey;
 			URL realUrl = new URL(getAccessTokenUrl);
 			// 打开和URL之间的连接
 			HttpURLConnection connection = (HttpURLConnection) realUrl.openConnection();
@@ -57,11 +69,32 @@ public class BaiduAipServiceImp implements BaiduAipService {
 			JSONObject jsonObject = new JSONObject(result);
 			String access_token = jsonObject.getString("access_token");
 			return access_token;
-		} catch (Exception e) {
-			System.err.printf("获取token失败！");
-			e.printStackTrace(System.err);
-		}
-		return null;
 	}
+	
+	//高精度文字识别
+	public Map<String, Object> accurateBasic(String imgPath) throws Exception {
+        // 请求url
+        String url = "https://aip.baidubce.com/rest/2.0/ocr/v1/accurate_basic";
+        try {
+            // 本地文件路径
+            byte[] imgData = FileUtil.readFileByBytes(imgPath);
+            String imgStr = Base64Util.encode(imgData);
+            String imgParam = URLEncoder.encode(imgStr, "UTF-8");
+
+            String param = "image=" + imgParam;
+
+            // 注意这里仅为了简化编码每一次请求都去获取access_token，线上环境access_token有过期时间， 客户端可自行缓存，过期后重新获取。
+            String accessToken = getAccessToken();
+
+            String result = HttpUtil.post(url, accessToken, param);
+            Gson gs = new Gson();
+            Map<String, Object> map = gs.fromJson(result, Map.class);
+            System.out.println(result);
+            return map;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception(e);
+        }
+    }
 }
 
