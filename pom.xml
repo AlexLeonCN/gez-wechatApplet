@@ -11,11 +11,6 @@
 	<packaging>jar</packaging>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.gez</groupId>
-			<artifactId>gez-common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 		<!--eureka -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -39,6 +34,11 @@
 					<artifactId>junit-vintage-engine</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.gez</groupId>
+			<artifactId>gez-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
