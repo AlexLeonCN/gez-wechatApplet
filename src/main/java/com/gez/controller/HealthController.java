@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
   *  健康检查类
  */
 @RestController
+@RequestMapping("/ping")
 public class HealthController {
-	@RequestMapping("/Ping")
+	@RequestMapping("/test")
 	@ResponseBody
 	String ping() {
 		return "Pong";
